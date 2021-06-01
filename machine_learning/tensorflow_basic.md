@@ -86,7 +86,7 @@ model.add(Dense(1, activation = '활성화 함수'))
 </code>
 </pre>
 ![2](https://user-images.githubusercontent.com/84856055/120343346-96760f00-c333-11eb-883a-bb137ec9a868.JPG)
-<br><br><br>
+<br><br>
 ## Compile
 ### 만들어진 모델을 컴파일, 학습에 대한 설정
 <pre>
