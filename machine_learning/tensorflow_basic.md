@@ -63,8 +63,8 @@ session **실행은 session.run() 함수를 이용**, ()안에 tensor나 연산�
 </br>
 ##### session의 실행 모습 전과 후 비교
 </br></br>
-### Dense 레이어
-입력과 출력을 모두 연결해주며 입력과 출력을 각각 연결해주는 가중치를 포함하고 있다.
+## Dense 레이어 (순차형 모델 Sequential 기준으로 일단 작성, 차후에 추가)
+### 입력과 출력을 모두 연결해주며 입력과 출력을 각각 연결해주는 가중치를 포함하고 있다.
 <pre>
 <code>
 Dense(1, input_dim = 2, activation = 'sigmoid')
@@ -73,9 +73,10 @@ Dense(1, input_dim = 2, activation = 'sigmoid')
 * 첫번째 인자 : 출력 뉴런(노드)의 수를 결정
 * 두번째 인자 : 입력 뉴런(노드)의 수를 결정, **맨 처음 입력층에서만 사용**
 * 세번째 인자 : 활성화 함수를 선택   
+  - linear : default 값으로 입력 뉴런과 가중치로 계산된 결과값이 그대로 출력
   - relu : 은닉층으로 학습, 역전파를 통해 좋은 성능이 나오기 때문에 마지막 층이 아니면 대부분 relu 를 이용
-  - sigmoid : Yes or No 와 같은 **이진 분류 문제**에 사용
-  - softmax : **확률 값을 이용**해 다양한 클래스를 분류하기 위한 문제에 사용
+  - sigmoid : Yes or No 와 같은 **이진 분류 문제**에 사용, 출력층에 주로 쓰임
+  - softmax : **확률 값을 이용**해 다양한 클래스를 분류하기 위한 문제에 사용, 출력층에 주로 쓰임
 <pre>
 <code>
 model = Sequential()
@@ -85,4 +86,26 @@ model.add(Dense(1, activation = '활성화 함수'))
 </code>
 </pre>
 ![2](https://user-images.githubusercontent.com/84856055/120343346-96760f00-c333-11eb-883a-bb137ec9a868.JPG)
-
+<br><br><br>
+## Compile
+### 만들어진 모델을 컴파일, 학습에 대한 설정
+<pre>
+<code>
+model.compile(loss = 'binary_crossentropy', optimizer = 'SGD', metrics=['accuracy'])
+</code>
+</pre>
+* loss : 손실함수를 설정해주는 부분 (참조 : <https://keras.io/losses/>
+* optimizer : 최적화 함수를 설정하는 부분 (참조 : <https://keras.io/ko/optimizers/>)
+* metrics : 모델의 성능을 판정하는데 사용하는 지표 (참조 : <https://keras.io/ko/metrics/>)
+<br><br>
+## fit
+### 컴파일한 모델을 훈련
+<pre>
+<code>
+model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
+</code>
+</pre>
+* 첫번째 인자 : 입력 데이터
+* 두번째 인자 : 출력 데이터
+* epochs : 훈련 횟수
+* batch_size : 작업단위를 의미, default는 32
