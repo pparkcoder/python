@@ -21,10 +21,11 @@
 * value = 상수 또는 dtype 타입을 가진 값들의 리스트
 * shape = 인자가 존재할 경우 차원을 결정, **그 외에는 value의 shape를 그대로 사용**
 * dtype = 인자가 존재하지 않을 경우, **value로 부터 타입을 추론하여 사용**
-* name = 텐서의 명칭
-      
+* name = 텐서의 명칭      
 <pre>
 <code>
+import tensorflow as tf
+
 a = tf.constant(5)
 b = tf.constant(2)
 c = tf.constant(3)
