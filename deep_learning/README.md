@@ -116,6 +116,7 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
 * 카테고리형 데이터의 경우 일반적으로 회귀분석과 같은 연속형 변수를 다루는 분석기법에서는 사용할 수 없기 때문에 수치형 데이터로 변환해 주어야 함
 <br><br>
 ## 데이터 전처리
+### 머신러닝 알고리즘은 문자열 값을 입력 값으로 허락하지 않기 때문에 모든 문자열 값들을 숫자형으로 인코딩하는 전처리 작업(Preprocessing) 후에 모델에 학습을 시켜야 함<br>
 1. LabelEncoder : 문자를 0부터 시작하는 정수형 숫자로 바꿔주는 기능, 반대로 코드숫자를 이용하여 원본 값 구하기 가능
   - 일괄적인 숫자 값으로 변환되면서 예측 성능이 떨어질 수 있음
   - 선형 회귀와 같은 알고리즘에는 적용하지 않아야 함 but, 트리 계열의 알고리즘은 숫자의 이러한 특성을 반영하지 않으므로 가능
@@ -125,4 +126,4 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
   - 표현하고 싶은 단어의 index 위치에 1을 부여, 다른 단어의 index 위치에 0을 부여
 ![result](https://user-images.githubusercontent.com/84856055/120481579-3478e080-c3eb-11eb-9aec-b1c08675d730.JPG)   
 ![one-hot encoding](https://user-images.githubusercontent.com/84856055/120481051-abfa4000-c3ea-11eb-9131-f533a732cbac.JPG)
-<br><br>
+#### Label encoding과 One-hot encoding 차이
