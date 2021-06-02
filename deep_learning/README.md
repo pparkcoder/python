@@ -110,3 +110,19 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
 * 두번째 인자 : 출력 데이터
 * epochs : 훈련 횟수
 * batch_size : 작업단위를 의미, default는 32
+<br><br>
+## Dummy Variable (더미변수)
+* 카테고리형 데이터(Categorical Data)를 수치형 데이터(Numerical Data)로 변환한 데이터를 뜻함
+* 카테고리형 데이터의 경우 일반적으로 회귀분석과 같은 연속형 변수를 다루는 분석기법에서는 사용할 수 없기 때문에 수치형 데이터로 변환해 주어야 함
+<br><br>
+## 데이터 전처리
+1. LabelEncoder : 문자를 0부터 시작하는 정수형 숫자로 바꿔주는 기능, 반대로 코드숫자를 이용하여 원본 값 구하기 가능
+  - 일괄적인 숫자 값으로 변환되면서 예측 성능이 떨어질 수 있음
+  - 선형 회귀와 같은 알고리즘에는 적용하지 않아야 함 but, 트리 계열의 알고리즘은 숫자의 이러한 특성을 반영하지 않으므로 가능
+![labelencoder](https://user-images.githubusercontent.com/84856055/120481004-a00e7e00-c3ea-11eb-84ab-cbced65da799.JPG)
+2. One-hot encoding : 단어 집합의 크기를 벡터의 차원으로 하고, 표현하고 싶은 단어의 인덱스에 1의 값을 부여하고, 다른 인덱스에는 0을 부여하는 단어의 벡터 표현 방식
+  - 각 단어에 고유한 index를 부여 (정수 인코딩)
+  - 표현하고 싶은 단어의 index 위치에 1을 부여, 다른 단어의 index 위치에 0을 부여
+![result](https://user-images.githubusercontent.com/84856055/120481579-3478e080-c3eb-11eb-9aec-b1c08675d730.JPG)   
+![one-hot encoding](https://user-images.githubusercontent.com/84856055/120481051-abfa4000-c3ea-11eb-9131-f533a732cbac.JPG)
+<br><br>
