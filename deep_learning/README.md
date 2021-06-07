@@ -22,8 +22,7 @@
 * shape = 인자가 존재할 경우 차원을 결정, **그 외에는 value의 shape를 그대로 사용**
 * dtype = 인자가 존재하지 않을 경우, **value로 부터 타입을 추론하여 사용**
 * name = 텐서의 명칭      
-<pre>
-<code>
+```python3
 import tensorflow as tf
 
 a = tf.constant(5)
@@ -36,8 +35,7 @@ f = tf.subtract(d,e)
 with tf.Session() as sess:
     feches = [d,e,f]
     outs = sess.run(feches)
-</code>
-</pre>   
+```
 
 ![2](https://user-images.githubusercontent.com/84856055/120320668-66237600-c31d-11eb-9932-f8ab32f6d249.JPG)
 </br></br>
@@ -46,11 +44,9 @@ with tf.Session() as sess:
  * shape = 정수값의 tensor 또는 python 배열
  * mean = 정규분포의 평균값
  * sttdev = 정규분포의 표준 편차   
-<pre>
-<code>
+```python3
 init_v = tf.random_normal((1, 5), 0, 1) # shape = (1x5), mean = 0, sttdev = 1
-</code>
-</pre>
+```
 </br></br>
 ## tf.Session()
 ### operation 객체를 실행하고, tensor 객체를 평가하기 위한 환경을 제공하는 객체   
@@ -66,11 +62,9 @@ session **실행은 session.run() 함수를 이용**, ()안에 tensor나 연산�
 </br></br>
 ## Dense 레이어 (순차형 모델 Sequential 기준으로 일단 작성, 차후에 추가)
 ### 입력과 출력을 모두 연결해주며 입력과 출력을 각각 연결해주는 가중치를 포함하고 있다.
-<pre>
-<code>
+```python3
 Dense(1, input_dim = 2, activation = 'sigmoid')
-</code>
-</pre>
+```
 * 첫번째 인자 : 출력 뉴런(노드)의 수를 결정
 * 두번째 인자 : 입력 뉴런(노드)의 수를 결정, **맨 처음 입력층에서만 사용**
 * 세번째 인자 : 활성화 함수를 선택   
@@ -78,34 +72,28 @@ Dense(1, input_dim = 2, activation = 'sigmoid')
   - relu : 은닉층으로 학습, 역전파를 통해 좋은 성능이 나오기 때문에 마지막 층이 아니면 대부분 relu 를 이용
   - sigmoid : Yes or No 와 같은 **이진 분류 문제**에 사용, 출력층에 주로 쓰임
   - softmax : **확률 값을 이용**해 다양한 클래스를 분류하기 위한 문제에 사용, 출력층에 주로 쓰임
-<pre>
-<code>
+```python3
 model = Sequential()
 model.add(Dense(5, input_dim = 1, activation = '활성화 함수')) 
 model.add(Dense(3, activation = '활성화 함수'))
 model.add(Dense(1, activation = '활성화 함수')) 
-</code>
-</pre>
+```
 ![2](https://user-images.githubusercontent.com/84856055/120343346-96760f00-c333-11eb-883a-bb137ec9a868.JPG)
 <br><br>
 ## Compile
 ### 만들어진 모델을 컴파일, 학습에 대한 설정
-<pre>
-<code>
+```python3
 model.compile(loss = 'binary_crossentropy', optimizer = 'SGD', metrics=['accuracy'])
-</code>
-</pre>
+```
 * loss : 손실함수를 설정해주는 부분 (참조 : <https://keras.io/losses/>
 * optimizer : 최적화 함수를 설정하는 부분 (참조 : <https://keras.io/ko/optimizers/>)
 * metrics : 모델의 성능을 판정하는데 사용하는 지표 (참조 : <https://keras.io/ko/metrics/>)
 <br><br>
 ## fit
 ### 컴파일한 모델을 훈련
-<pre>
-<code>
+```python3
 model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
-</code>
-</pre>
+```
 * 첫번째 인자 : 입력 데이터
 * 두번째 인자 : 출력 데이터
 * epochs : 훈련 횟수
