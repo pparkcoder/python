@@ -117,7 +117,7 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
   - 각 단어에 고유한 index를 부여 (정수 인코딩)
   - 표현하고 싶은 단어의 index 위치에 1을 부여, 다른 단어의 index 위치에 0을 부여
 ![result](https://user-images.githubusercontent.com/84856055/120481579-3478e080-c3eb-11eb-9aec-b1c08675d730.JPG)   
+  - list 내의 원소들 One-hot encoding 방식 : **빈 list에 하나씩 넣어서 해당 list 통째로 넣어줌**<br>
+![1](https://user-images.githubusercontent.com/84856055/121154828-3d9dfd80-c882-11eb-8cb4-b9744d1c9570.JPG)<br>
 ![one-hot encoding](https://user-images.githubusercontent.com/84856055/120481051-abfa4000-c3ea-11eb-9131-f533a732cbac.JPG)
 #### Label encoding과 One-hot encoding 차이<br>
-  - list 내의 원소들 One-hot encoding 방식 : **빈 list에 하나씩 넣어서 해당 list 통째로 넣어줌**<br>
-![1](https://user-images.githubusercontent.com/84856055/121154828-3d9dfd80-c882-11eb-8cb4-b9744d1c9570.JPG)
