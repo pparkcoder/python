@@ -109,6 +109,10 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
   - 일괄적인 숫자 값으로 변환되면서 예측 성능이 떨어질 수 있음
   - 선형 회귀와 같은 알고리즘에는 적용하지 않아야 함 but, 트리 계열의 알고리즘은 숫자의 이러한 특성을 반영하지 않으므로 가능
 ![labelencoder](https://user-images.githubusercontent.com/84856055/120481004-a00e7e00-c3ea-11eb-84ab-cbced65da799.JPG)
+#### Label Encoder 예시
+![1](https://user-images.githubusercontent.com/84856055/121134916-ee020680-c86e-11eb-8331-87767e1295a6.JPG)    
+#### 다른 방법 예시
+<br><br>
 2. One-hot encoding : 단어 집합의 크기를 벡터의 차원으로 하고, 표현하고 싶은 단어의 인덱스에 1의 값을 부여하고, 다른 인덱스에는 0을 부여하는 단어의 벡터 표현 방식
   - 각 단어에 고유한 index를 부여 (정수 인코딩)
   - 표현하고 싶은 단어의 index 위치에 1을 부여, 다른 단어의 index 위치에 0을 부여
