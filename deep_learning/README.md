@@ -72,6 +72,7 @@ Dense(5, input_dim = 2, activation = 'sigmoid')
   - relu : 은닉층으로 학습, 역전파를 통해 좋은 성능이 나오기 때문에 마지막 층이 아니면 대부분 relu 를 이용
   - sigmoid : Yes or No 와 같은 **이진 분류 문제**에 사용, 출력층에 주로 쓰임
   - softmax : 확률 값을 이용해 **다양한 클래스를 분류**하기 위한 문제에 사용, 출력층에 주로 쓰임
+    - 총 합이 1인 형태로 바꿔줌 -> 큰 값이 두드러지게 나타나고 작은 값은 더 작아짐
 ```python3
 model = Sequential()
 model.add(Dense(5, input_dim = 1, activation = '활성화 함수')) # 첫번째 Dense가 은닉층 + 입력층의 역할을 겸함
