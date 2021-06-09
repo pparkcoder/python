@@ -66,7 +66,8 @@ session **실행은 session.run() 함수를 이용**, ()안에 tensor나 연산�
 Dense(5, input_dim = 2, activation = 'sigmoid')
 ```
 * 첫번째 인자 : 출력 뉴런(노드)의 수를 결정, 이 층에 5개의 노드를 만들겠다는 뜻
-* 두번째 인자 : 입력 뉴런(노드)의 수를 결정, 입력 데이터에서 몇개의 값을 가져올지 정하는 것으로 **맨 처음 입력층에서만 사용**
+* 두번째 인자 : 입력 뉴런(노드)의 수를 결정, 입력 데이터에서 몇개의 값을 가져올지 정하는 것
+  - **맨 처음 입력층에서만 사용**, **X data의 shape을 보고 결정** -> (100,2) -> input_dim = 12<br>
 * 세번째 인자 : 활성화 함수를 선택   
   - linear : default 값으로 입력 뉴런과 가중치로 계산된 결과값이 그대로 출력
   - relu : 은닉층으로 학습, 역전파를 통해 좋은 성능이 나오기 때문에 마지막 층이 아니면 대부분 relu 를 이용
@@ -89,7 +90,7 @@ model.compile(loss = 'binary_crossentropy', optimizer = 'SGD', metrics=['accurac
 * loss : 손실함수를 설정해주는 부분, 한 번 신경망이 실행될 때마다 오차 값을 추적하는 함수 (참조 : <https://keras.io/losses/>
   - binary_crossentropy : 이진 분류
   - categorical_crossentropy : 일반적인 분류<br>
-  - **Dense 레이어에서 사용되는 손실함수와 다르다**
+  - **Dense 레이어에서 사용되는 손실함수와 다르다**<br>
 * optimizer : 최적화 함수를 설정하는 부분, 오차를 어떻게 줄여 나갈지 정하는 함수 (참조 : <https://keras.io/ko/optimizers/>)
 * metrics : 모델 수행 결과를 나타내게끔 설정하는 부분으로 과적합을 방지하는 기능 (참조 : <https://keras.io/ko/metrics/>)
 <br><br>
@@ -110,6 +111,7 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
 ## 데이터 전처리
 ### 머신러닝 알고리즘은 문자열 값을 입력 값으로 허락하지 않기 때문에 모든 문자열 값들을 숫자형으로 인코딩하는 전처리 작업(Preprocessing) 후에 모델에 학습을 시켜야 함<br>
 1. LabelEncoder : 문자를 0부터 시작하는 정수형 숫자로 바꿔주는 기능, 반대로 코드숫자를 이용하여 원본 값 구하기 가능
+  - sklearn 라이브러리의 **LabelEncoder() 함수 사용 -> fit() 함수 사용 -> transform() 함수 사용**
   - 일괄적인 숫자 값으로 변환되면서 예측 성능이 떨어질 수 있음
   - 선형 회귀와 같은 알고리즘에는 적용하지 않아야 함 but, 트리 계열의 알고리즘은 숫자의 이러한 특성을 반영하지 않으므로 가능
 ![labelencoder](https://user-images.githubusercontent.com/84856055/120481004-a00e7e00-c3ea-11eb-84ab-cbced65da799.JPG)
@@ -118,10 +120,12 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
 #### 다른 방법 예시
 <br><br>
 2. One-hot encoding : 단어 집합의 크기를 벡터의 차원으로 하고, 표현하고 싶은 단어의 인덱스에 1의 값을 부여하고, 다른 인덱스에는 0을 부여하는 단어의 벡터 표현 방식
+  - **tf.keras.utils.categorical() 함수 사용**
   - 각 단어에 고유한 index를 부여 (정수 인코딩)
   - 표현하고 싶은 단어의 index 위치에 1을 부여, 다른 단어의 index 위치에 0을 부여
+  - **활성화 함수(loss 부분)를 적용하려면 Y 값이 0과 1로 이루어져 있어야 하기에 사용**
 ![result](https://user-images.githubusercontent.com/84856055/120481579-3478e080-c3eb-11eb-9aec-b1c08675d730.JPG)   
   - list 내의 원소들 One-hot encoding 방식 : **빈 list에 하나씩 넣어서 해당 list 통째로 넣어줌**<br>
 ![1](https://user-images.githubusercontent.com/84856055/121154828-3d9dfd80-c882-11eb-8cb4-b9744d1c9570.JPG)<br>
 ![one-hot encoding](https://user-images.githubusercontent.com/84856055/120481051-abfa4000-c3ea-11eb-9131-f533a732cbac.JPG)
-#### Label encoding과 One-hot encoding 차이<br>
+#### Y 데이터의 문자열을 숫자로 바꿔준다 (Label encoing) -> 숫자는 0과 1로만 이루어져 있어야 한다 (One - hot encoding)<br>
