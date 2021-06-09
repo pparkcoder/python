@@ -63,20 +63,20 @@ session **실행은 session.run() 함수를 이용**, ()안에 tensor나 연산�
 ## Dense 레이어 (순차형 모델 Sequential 기준으로 일단 작성, 차후에 추가)
 ### 입력과 출력을 모두 연결해주며 입력과 출력을 각각 연결해주는 가중치를 포함하고 있다.
 ```python3
-Dense(1, input_dim = 2, activation = 'sigmoid')
+Dense(5, input_dim = 2, activation = 'sigmoid')
 ```
-* 첫번째 인자 : 출력 뉴런(노드)의 수를 결정
-* 두번째 인자 : 입력 뉴런(노드)의 수를 결정, **맨 처음 입력층에서만 사용**
+* 첫번째 인자 : 출력 뉴런(노드)의 수를 결정, 이 층에 5개의 노드를 만들겠다는 뜻
+* 두번째 인자 : 입력 뉴런(노드)의 수를 결정, 입력 데이터에서 몇개의 값을 가져올지 정하는 것으로 **맨 처음 입력층에서만 사용**
 * 세번째 인자 : 활성화 함수를 선택   
   - linear : default 값으로 입력 뉴런과 가중치로 계산된 결과값이 그대로 출력
   - relu : 은닉층으로 학습, 역전파를 통해 좋은 성능이 나오기 때문에 마지막 층이 아니면 대부분 relu 를 이용
   - sigmoid : Yes or No 와 같은 **이진 분류 문제**에 사용, 출력층에 주로 쓰임
-  - softmax : **확률 값을 이용**해 다양한 클래스를 분류하기 위한 문제에 사용, 출력층에 주로 쓰임
+  - softmax : 확률 값을 이용해 **다양한 클래스를 분류**하기 위한 문제에 사용, 출력층에 주로 쓰임
 ```python3
 model = Sequential()
-model.add(Dense(5, input_dim = 1, activation = '활성화 함수')) 
-model.add(Dense(3, activation = '활성화 함수'))
-model.add(Dense(1, activation = '활성화 함수')) 
+model.add(Dense(5, input_dim = 1, activation = '활성화 함수')) # 첫번째 Dense가 은닉층 + 입력층의 역할을 겸함
+model.add(Dense(3, activation = '활성화 함수')) # 은닉층
+model.add(Dense(1, activation = '활성화 함수')) # 맨 마지막 층은 결과를 출력하는 출력층의 역할
 ```
 ![2](https://user-images.githubusercontent.com/84856055/120343346-96760f00-c333-11eb-883a-bb137ec9a868.JPG)
 <br><br>
@@ -85,9 +85,12 @@ model.add(Dense(1, activation = '활성화 함수'))
 ```python3
 model.compile(loss = 'binary_crossentropy', optimizer = 'SGD', metrics=['accuracy'])
 ```
-* loss : 손실함수를 설정해주는 부분 (참조 : <https://keras.io/losses/>
-* optimizer : 최적화 함수를 설정하는 부분 (참조 : <https://keras.io/ko/optimizers/>)
-* metrics : 모델의 성능을 판정하는데 사용하는 지표 (참조 : <https://keras.io/ko/metrics/>)
+* loss : 손실함수를 설정해주는 부분, 한 번 신경망이 실행될 때마다 오차 값을 추적하는 함수 (참조 : <https://keras.io/losses/>
+  - binary_crossentropy : 이진 분류
+  - categorical_crossentropy : 일반적인 분류<br>
+  - **Dense 레이어에서 사용되는 손실함수와 다르다**
+* optimizer : 최적화 함수를 설정하는 부분, 오차를 어떻게 줄여 나갈지 정하는 함수 (참조 : <https://keras.io/ko/optimizers/>)
+* metrics : 모델 수행 결과를 나타내게끔 설정하는 부분으로 과적합을 방지하는 기능 (참조 : <https://keras.io/ko/metrics/>)
 <br><br>
 ## fit
 ### 컴파일한 모델을 훈련
@@ -97,7 +100,7 @@ model.fit(x_data, y_data, epochs = 1000, batch_size = 1)
 * 첫번째 인자 : 입력 데이터
 * 두번째 인자 : 출력 데이터
 * epochs : 훈련 횟수
-* batch_size : 작업단위를 의미, default는 32
+* batch_size : 작업단위를 의미, default는 32 (**너무 크면 학습 속도가 느려지고, 너무 작으면 실행 값의 편차가 생겨 결과값이 불안정**)
 <br><br>
 ## Dummy Variable (더미변수)
 * 카테고리형 데이터(Categorical Data)를 수치형 데이터(Numerical Data)로 변환한 데이터를 뜻함
