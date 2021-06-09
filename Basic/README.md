@@ -54,7 +54,8 @@ df = df_pre.sample(frac = 1)
 
 ### 모델 업데이트
 그냥 저장하는 것이 아닌, epoch마다 모델의 정확도를 함께 기록하면서 저장하기
-1. 모델이 저장될 폴더 지정 -> 폴더가 없다면 자동으로 폴더를 만들어 줌
+1. 모델이 저장될 폴더 지정
+   - 폴더가 없다면 자동으로 폴더를 만들어 줌
 2. epoch 횟수와 테스트셋 오차 값을 이용해 파일 이름을 만들기 **(확장자 : hdf5)**
    - ex : 100-0.0612.hdf5 : 100번째 epoch를 실행하고 난 결과 오차가 0.0612 인 모델
 ```python3
@@ -73,16 +74,17 @@ from keras.callbacks import ModelCheckpoint
 #checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1)
 checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True)
 ```
- - verbose : 1로 정하면 해당 함수의 진행사항 출력, 0으로 정하면 출력되지 않음
- - monitor 관련
-   - loss : 학습셋 오차
-   - val-loss : 테스트 오차
-   - acc : 학습 정확도
-   - val_acc : 테스트셋 정확도
- - save_best_only : 앞서 저장한 모델보다 나아졌을 때만 저장
+   - verbose : 1로 정하면 해당 함수의 진행사항 출력, 0으로 정하면 출력되지 않음
+   - monitor 관련
+      - loss : 학습셋 오차
+      - val-loss : 테스트 오차
+      - acc : 학습 정확도
+      - val_acc : 테스트셋 정확도
+    - save_best_only : 앞서 저장한 모델보다 나아졌을 때만 저장
 <br>
 
-4. 모델 실행 및 저장 -> fit() 함수 사용시 **callbacks 옵션 사용**
+4. 모델 실행 및 저장
+   - fit() 함수 사용시 **callbacks 옵션 사용**
 ```python3
 model.fit(X, Y, validation_split=0.2, epochs=200, batch_size=200, verbose=0, callbacks=[checkpointer])
 ```
@@ -90,3 +92,16 @@ model.fit(X, Y, validation_split=0.2, epochs=200, batch_size=200, verbose=0, cal
 ### 학습 자동 중단
 - 학습이 진행될수록 학습셋의 정확도는 올라가지만 과적합 때문에 테스트셋의 실험 결과는 점점 나빠진다
 - **EarlyStopping()** 함수는 테스트셋 오차가 줄지 않으면 학습을 멈추게 함
+- **callbacks 옵션 사용**
+```python3
+from keras.callbacks import EarlyStopping
+
+checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True)
+
+early_stopping_callback = EarlyStopping(monitor='val_loss', patience=100) # 모니터할 값과, 몇 번까지 기다릴지 정함
+
+#model.fit(X, Y, validation_split=0.2, epochs=3500, batch_size=500, verbose=0, callbacks=[checkpointer])
+model.fit(X, Y, validation_split=0.2, epochs=3500, batch_size=500, verbose=0, callbacks=[early_stopping_callback,checkpointer])
+```
+
+
