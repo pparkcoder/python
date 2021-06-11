@@ -6,4 +6,4 @@ Description
 
 Promise
 ----------------
-* 2 Day, at least 1 commit
+* At least 2 days, 1 commit
