@@ -21,7 +21,7 @@ print("Accuracy : %.4f" % (model.evaluate(x_test, y_test)[1]))
    
 ## K-Cross-Validation (K겹 교차 검증)
  - 데이터가 충분하지 않다면 좋은 결과값을 얻기 어려운 train_test_split()을 보완하는 방법
- - **데이터 셋을 여러 개로 나누어 하니씩 테스트셋으로 사용하고 나머지를 모두 합해서 학습셋으로 사용하는 방법**
+ - **데이터 셋을 여러 개로 나누어 하나씩 테스트셋으로 사용하고 나머지를 모두 합해서 학습셋으로 사용하는 방법**
  - sklearn의 StratifielKFold() 함수 사용<br>
 ```python3
 from sklearn.model_selection import StratifielKFold
