@@ -3,6 +3,8 @@
 
 ### 1. 데이터셋 생성하기 + 전처리
  - 원본 데이터를 불러오거나 시뮬레이션을 통해 데이터를 생성하여 훈련셋, 검증셋, 시험셋을 생성
+ - 케라스는 데이터를 0에서 1 사이의 값으로 변환한 다음 구동할 때 **최적의 성능**을 보임
+ - 전처리 과정에서 0 또는 1로만 이루어진 벡터로 값을 수정하기 위해 **np_utils.to_categorical(클래스, 클래스의 개수) 함수** 사용
 ```python3
 from tensorflow.keras.datasets import mnist 
 import tensorflow as ft
