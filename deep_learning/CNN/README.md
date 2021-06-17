@@ -104,8 +104,9 @@ train_datagen = ImageDataGenerator(rescale=1./255,
  - rotation_range : 정해진 각도만큼 이미지를 회전시킴
  - shear_range : 좌표 하나를 고정시키고 다른 몇 개의 좌표를 이동시키는 변환
  - zoom_range : 정해진 범위 안에서 축소 또는 확대
- - fill_mode : 이미지 회전 및 이동 시 생기는 빈 공간을 어떻게 채울지 결정, nearest는 가장 비슷한 색으로 채워짐
-
+ - fill_mode : 이미지 회전 및 이동 시 생기는 빈 공간을 어떻게 채울지 결정, nearest는 가장 비슷한 색으로 채워짐<br><br>
+![1](https://user-images.githubusercontent.com/84856055/122336798-57bd9700-cf78-11eb-8953-9e75376174fd.JPG)
+![2](https://user-images.githubusercontent.com/84856055/122336804-59875a80-cf78-11eb-916f-c3585b0f0f0e.JPG)
  ### 이미지 불러오기
  flow_from_directory() 함수 사용
  ```python3
