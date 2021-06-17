@@ -35,7 +35,7 @@ print(t.word_index) # 각 단어에 매겨진 index 값 출력
  <br><br>
 ### 단어 One - hot encoding
   - 각 단어를 모두 0으로 바꾸어 주고 원하는 단어만 1로 바꾸어 주는 것
-  - Tokenizer의 **text_to_sequences() 함수 사용**
+  - 텍스트 안의 단어들을 숫자의 시퀀스의 형태로 변환하는 **text_to_sequences() 함수 사용**
 ```python3
 encoded=t.texts_to_sequences([text])[0]
 print(encoded)
@@ -43,7 +43,7 @@ print(encoded)
 ```
 [2, 5, 1, 6, 3, 7] # 순서는 상관 X
 ```
-  - 0과 1로만 이루진 배열로 바꾸어주는 **to_categorical()함수 사용**
+  - 0과 1로만 이루어진 배열로 바꾸어주는 **to_categorical()함수 사용**
 ```python3
 one_hot = to_categorical(encoded)
 print(one_hot)
@@ -71,7 +71,7 @@ model.add(Embedding(16,4,input_length = 2)) # 입력될 단어 16 -> 출력되�
 ### 패딩(Padding) 
  - 딥러닝 모델에 입력을 하려면 학습 데이터의 길이가 동일해야 함
  - 길이를 똑같이 맞추어 주는 작업
- - **pad_sequences() 함수 사용**
+ - 숫자 0을 이용해서 같은 길이의 시퀀스로 변환하는 **pad_sequences() 함수 사용**
 ```python3
 docs = ["너무 재밌네요","최고예요","참 잘 만든 영화예요","추천하고 싶은 영화입니다","한번 더 보고싶네요","글쎄요","별로예요","생각보다 지루하네요","연기가 어색해요","재미없어요"]
 
@@ -80,7 +80,6 @@ token = Tokenizer()
 token.fit_on_texts(docs)
 print(token.word_index)
 x = token.texts_to_sequences(docs)
-print("\n리뷰 텍스트, 토큰화 결과:\n",  x)
 
 padded_x = pad_sequences(x, 4)  # 서로 다른 길이의 데이터를 4로 맞추기
 print("\n패딩 결과:\n", padded_x)
