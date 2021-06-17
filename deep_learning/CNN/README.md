@@ -81,3 +81,70 @@ model.add(Dense(256, activation = "relu"))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation = "softmax"))
 ```
+<br><br>
+## ImageDataGenerator
+이미지를 학습시킬 때 학습데이터의 양이 적을 경우, 학습데이터를 **조금씩 변형시켜서 학습데이터의 양을 늘리는 방식중**에 하나
+<br>
+### 모델 생성
+ImageDataGenerator() 함수 사용
+```python3
+train_datagen = ImageDataGenerator(rescale=1./255,
+                                   horizontal_flip=True,
+                                   vertical_flip=True,
+                                   width_shift_range=0.1,
+                                   height_shift_range=0.1,
+                                   rotation_range=5,
+                                   shear_range=0.7,
+                                   zoom_range=1.2,
+                                   fill_mode='nearest')
+```
+ - rescale : 이미지 크기를 변경, 원본영상이 0~255의 값을 가진다면 ./255를 통해 0~1의 값으로 변환됨
+ - horizontal_flip, vertical_flip : 이미지를 수평 또는 수직으로 뒤집음
+ - width_shift_range, height_shift_range : 정해진 범위 안에서 이미지를 수평 또는 수직으로 랜덤하게 평행 이동 시킴
+ - rotation_range : 정해진 각도만큼 이미지를 회전시킴
+ - shear_range : 좌표 하나를 고정시키고 다른 몇 개의 좌표를 이동시키는 변환
+ - zoom_range : 정해진 범위 안에서 축소 또는 확대
+ - fill_mode : 이미지 회전 및 이동 시 생기는 빈 공간을 어떻게 채울지 결정, nearest는 가장 비슷한 색으로 채워짐
+
+ ### 이미지 불러오기
+ flow_from_directory() 함수 사용
+ ```python3
+ train_generator = train_datagen.flow_from_directory(
+    '/train', # 이미지가 있는 폴더 경로
+    target_size = (150,150) # 이미지 크기
+    batch_size = 5
+    class_mode = 'binary' # 적합한 mode 실행
+)
+
+test_generator = test_datagen.flow_from_directory(
+    '/test',
+    target_size = (150,150)
+    batch_size = 5
+    class_mode = 'binary'
+)
+```
+
+### 출력하기
+```python3
+augs = train_generator.__getitem__(8)
+
+plt.figure(figsize=(16, 8))
+for i, img in enumerate(augs[0]):
+    plt.subplot(4, 8, i+1)
+    plt.title('%.2f' % augs[1][i])
+    plt.axis('off')
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.imshow(img.squeeze())
+```
+
+### (컴파일 후) 모델 학습
+**fit() 함수가 아닌** fit_generator() 함수 사용
+```python3
+model.fit_generator(
+    train_generator, # 적용 모델
+    steps_per_epoch = 100, # 샘플의 크기
+    epochs = 20,
+    validation_data = test_generator, validation_steps = 4,
+    callbacks=[ModelCheckpoint('models/%s.h5' % (start_time), monitor='val_loss', save_best_only=True, mode='min', verbose=1)]
+)
+```
