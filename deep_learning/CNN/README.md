@@ -98,7 +98,7 @@ train_datagen = ImageDataGenerator(rescale=1./255,
                                    zoom_range=1.2,
                                    fill_mode='nearest')
 ```
- - rescale : 이미지 크기를 변경, 원본영상이 0~255의 값을 가진다면 ./255를 통해 0~1의 값으로 변환됨
+ - rescale : 이미지 크기를 변경, 원본영상이 0에서 255 사이의 값을 가진다면 ./255를 통해 0에서 1 사이의 값으로 변환됨
  - horizontal_flip, vertical_flip : 이미지를 수평 또는 수직으로 뒤집음
  - width_shift_range, height_shift_range : 정해진 범위 안에서 이미지를 수평 또는 수직으로 랜덤하게 평행 이동 시킴
  - rotation_range : 정해진 각도만큼 이미지를 회전시킴
