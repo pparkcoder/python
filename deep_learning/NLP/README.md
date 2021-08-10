@@ -43,6 +43,7 @@ print(t.word_index) # 각 단어에 매겨진 index 값 출력
  ```
  <br><br>
 ### 단어 One - hot encoding
+  - 해당 단어가 문장의 어디에서 왔는지, 단어의 순서는 어떤지, 문장의 다른 요소와 어떤 관계를 가지고 있는지 알아보는 방법
   - 각 단어를 모두 0으로 바꾸어 주고 원하는 단어만 1로 바꾸어 주는 것
   - 텍스트 안의 단어들을 숫자의 시퀀스의 형태로 변환하는 **text_to_sequences() 함수 사용**
 ```python3
@@ -66,10 +67,11 @@ print(one_hot)
  [0. 0. 0. 0. 0. 0. 0. 1.]] #인덱스 7의 원-핫 벡터
  ```
  <br><br>
- ### 단어 임베딩(Embedding)
+ ### 단어 임베딩(word embedding)
   - One - hot encoding 은 단어의 의미를 전혀 고려하지 않으며 **벡터의 길이가 총 단어 수**가 되므로 길이가 길어진다는 단점
+  - 1만 개의 단어 토큰으로 이루어진 문장을 다룰 시, 9999개의 0과 1개의 1로 이루어진 단어 벡터가 생성됨
   - 이러한 공간적 낭비, 단어의 의미를 고려하기 위해 조밀한 차원에 단어를 벡터로 표현한 것
-  - **Embegging() 함수 사용**
+  - 적절한 크기의 배열로 바꾸어 주기 위해 최적의 유사도를 계산하는 **Embegging() 함수 사용**
 ```python3
 from keras.layers import Embegging
 
@@ -138,13 +140,13 @@ print(padded)
  - 최대 길이를 넘는 시퀀스를 잘라낼 위치를 지정
  - post로 지정 시 뒷부분을 잘라냄
 ```python3
-padded = pad_sequences(sequences, padding='pre', maxlen=6, truncating='post')
+padded = pad_sequences(sequences, padding='pre', maxlen=5, truncating='post')
 
 print(padded)
 ```
 ```
-[[ 0  0  5  3  2  4]
-[ 0  0  5  3  2  7]
-[ 0  0  6  3  2  4]
-[ 8  6  9  2  4 10]]
+[[ 0  0  5  3  2]
+[ 0  0  5  3  2]
+[ 0  0  6  3  2]
+[ 8  6  9  2  4]]
 ```
