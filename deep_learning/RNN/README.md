@@ -29,3 +29,4 @@
 - Input gate : 새로운 정보가 Cell State에 저장 될지 말지를 결정
 - Forget gate : 과거의 정보를 버릴지 말지를 결정, sigmoid 활성화 함수를 통해 0 - 1 사이 값 출력
 - Output gate: State를 바탕으로 sigmoid 층에 input 데이터를 태워 State의 어느 부분을 출력으로 내보낼지 결정
+- [참고링크](https://wegonnamakeit.tistory.com/7)
