@@ -89,7 +89,9 @@ print(one_hot)
 from keras.layers import Embegging
 
 model = Sequential()
-model.add(Embedding(16,4,input_length = 2)) # 입력될 단어 16 -> 출력되는 벡터 크기 4, 매번 2개씩만 넣겠음
+word_size = len(t.word_index) + 1 # 0이 맨 앞에 나오므로 길이 + 1
+model.add(Embedding(word_size,4,input_length = 2)) # 대부분 이런 형식으로 진행, 아래 코드와 같음
+# model.add(Embedding(16,4,input_length = 2)) # 입력될 단어 16 -> 출력되는 벡터 크기 4, 매번 2개씩만 넣겠음
 ```
 <br><br>
 #### 임베딩을 통해 가능한 것
@@ -111,11 +113,11 @@ model.add(Embedding(16,4,input_length = 2)) # 입력될 단어 16 -> 출력되�
 - Word2Vec : CBOW 와 Skip-gram 방식의 알고리즘을 이용한 임베딩
      - **CBOW(Continuous Bag of Workds)** : 주변 단어로 중간 단어를 예측하는 과정으로 학습, 즉 문장에서 한 단어 앞뒤로 붙어있는 단어들을 통해 유추
        - 예시 : "나는 추운 겨울보다 __ 여름이 좋아" -> "겨울보다" 와 "여름이"를 통해 "따뜻한"을 유추
-       - 단점 : "따뜻한 여름이" 에서의 "따뜻한"과 "마음이 따뜻한" 에서의 "따뜻한"이 같이 쓰일경우 문제 발생 -> 은유적 표현시 문제 발생
+       - 단점 : "따뜻한 여름이" 에서의 "따뜻한"과 "마음이 따뜻한" 에서의 "따뜻한"이 같이 쓰일경우 문제 발생 -> 은유적 표현시 문제 발생<br>
      - **Skip-gram** : 중간 단어로 주변 단어를 예측하는 과정으로 학습, CBOW와 반대
        - 예시 : "나는 추운 __보다 따뜻한 __이 좋아" -> "따뜻한"을 통해 "겨울"과 "여름"을 유추
        - 한 단어와 연관된 두 가지 이상의 의미론적 벡터 찾기 가능
-       - ***CBOW 보다 결과가 더 좋다고 함***
+       - ***CBOW 보다 결과가 더 좋다고 함***<br><br>
 - FastText, BERT, ELMo, GPT 등 존재
 <br><br>
 ### 패딩(Padding) 
