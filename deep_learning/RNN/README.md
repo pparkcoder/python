@@ -21,6 +21,7 @@
 - 다음 층으로 기억된 값을 넘길지를 관리하는 단계 Cell state를 추가
 - 데이터를 계산하는 위치에 입력(Input), 망각(Forget), 출력(Output) 게이트가 추가되어 각 상태 값을 메모리 공간 셀에 저장하고, 데이터를 접하는 게이트 부분을 조정하여 불필요한 연산, 오차 등을 줄여 장기 의존성 문제를 일정 부분 해결
 - 직전 데이터뿐만 아니라, ***좀 더 거시적으로 과거 데이터를 고려하여 미래의 데이터를 예측하기 위함***
+- 활성화 함수로는 tanh를 사용
 ![2](https://user-images.githubusercontent.com/84856055/129028353-50cf9238-a3b0-47e4-95dd-20310214aac4.JPG)
 ![1](https://user-images.githubusercontent.com/84856055/129028520-ddca3da5-e712-4a9f-8644-690ed71b31b9.JPG)
 ![2](https://user-images.githubusercontent.com/84856055/129028523-8a10e930-9582-415f-81ce-0d17d278d0c7.JPG)
